@@ -1,0 +1,8 @@
+<h3>Nodes Index</h3>
+
+<div> Total nodes: {{model.length}}</div>
+<ul>
+  {{#each node in model}}
+    <li>{{ node.id }} : {{ node.label }}</li>
+  {{/each}}  
+</ul>
