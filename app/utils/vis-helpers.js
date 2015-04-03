@@ -1,3 +1,3 @@
 export default function visHelpers() {
-  return true;
+  return window.vis;
 }
