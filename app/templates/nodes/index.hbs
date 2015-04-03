@@ -1,8 +1,17 @@
 <h3>Nodes Index</h3>
 
-<div> Total nodes: {{model.length}}</div>
+<div> Total nodes: {{model.nodes.length}}</div>
 <ul>
-  {{#each node in model}}
+  {{#each node in model.nodes}}
     <li>{{ node.id }} : {{ node.label }}</li>
+  {{/each}}  
+</ul>
+
+<div> Total Edges: {{model.edges.length}}</div>
+<ul>
+  {{#each edge in model.edges}}
+    <li>
+      {{ edge.id }} : from node {{edge.from}} to {{edge.to}}
+    </li>
   {{/each}}  
 </ul>
