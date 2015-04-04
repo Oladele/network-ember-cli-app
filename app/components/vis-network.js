@@ -2,10 +2,8 @@ import Ember from 'ember';
 import visHelper from '../utils/vis-helpers'
 
 export default Ember.Component.extend({
-
-  didInsertElement: function(){
-    this.showGraph()
-  },
+  nodes: [], // passed-in 
+  edges: [], // passed-in
 
   showGraph: function(){
     var self = this;
@@ -16,7 +14,7 @@ export default Ember.Component.extend({
     ]).then(function(values){
         self.makeGraph(values);
     });
-  },
+  }.on('didInsertElement'),
 
   makeGraph: function(values){
     var this_component = this
