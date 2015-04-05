@@ -2,8 +2,13 @@ import Ember from 'ember';
 import visHelper from '../utils/vis-helpers'
 
 export default Ember.Component.extend({
-  nodes: [], // passed-in 
-  edges: [], // passed-in
+  // passed-in
+  nodes: [],
+  edges: [],
+  // other instance variables
+  nodes_vis: [], //visHelper.DataSet()
+  edges_vis: [], //visHelper.DataSet()
+  network: null, // visHelper.network
 
   showGraph: function(){
     var self = this;
@@ -24,7 +29,7 @@ export default Ember.Component.extend({
   },
 
   makeGraph: function(values){
-    var nodes_pojos, edges_pojos, nodes, edges;
+    var nodes_pojos, edges_pojos;
 
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
