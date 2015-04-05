@@ -50,5 +50,17 @@ export default Ember.Component.extend({
     };
     
     this.network = new visHelper.Network(container, data, options);
+    this.network.on('select', this.onSelectNode);
+  },
+
+  onSelectNode: function(properties) {
+    console.log("onSelectNode got fired, properties:", properties)
+    if (properties.nodes.length > 0) {
+      var select_node_obj = { 
+        node_id: properties.nodes[0],
+        // graph_nodes: this_component.get_graph_nodes()
+      };
+      this_component.sendAction('action', select_node_obj );
+    };
   },
 });
