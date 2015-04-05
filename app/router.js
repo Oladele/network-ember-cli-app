@@ -6,6 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 export default Router.map(function() {
-  this.resource('nodes', function() {});
+  this.resource('nodes', function() {
+    this.route('show', {
+      path: ':node_id'
+    });
+  });
   this.resource('edges', function() {});
 });
