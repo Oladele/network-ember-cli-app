@@ -56,6 +56,7 @@ export default Ember.Component.extend({
 
   onSelectNode: function(properties) {
     // 'this' references instance of Network that triggered this event Handler
+    console.log("onSelectNode properties:", properties);
     var ember_component = this.ember_component
     if (properties.nodes.length > 0) {
       var select_node_obj = { 
