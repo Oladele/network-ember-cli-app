@@ -31,5 +31,10 @@ var bootstrapFonts = pickFiles('bower_components/bootstrap-sass-official/assets/
     destDir: 'fonts/bootstrap'
 });
 
-module.exports = app.toTree(bootstrapFonts);
+var fontawesomeFonts = pickFiles('bower_components/fontawesome/fonts', {
+    srcDir: '/',
+    destDir: 'fonts'
+});
+
+module.exports = app.toTree([bootstrapFonts, fontawesomeFonts]);
 // module.exports = app.toTree();
