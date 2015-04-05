@@ -16,32 +16,34 @@ export default Ember.Component.extend({
     });
   }.on('didInsertElement'),
 
+  toPojoArray: function(storeRecords){
+    var pojos = storeRecords.toArray().map(function(record){
+      return record.get('data')
+    });
+    return pojos
+  },
+
   makeGraph: function(values){
-    var this_component = this
     var nodes_pojos, edges_pojos, nodes, edges;
 
-    nodes_pojos = values[0].toArray().map(function(node){
-      return node.get('data')
-    });
-    edges_pojos = values[1].toArray().map(function(edge){
-      return edge.get('data')
-    });
+    nodes_pojos = this.toPojoArray(values[0]);
+    edges_pojos = this.toPojoArray(values[1]);
 
-    this_component.nodes_vis = new visHelper.DataSet(nodes_pojos)
-    this_component.edges_vis = new visHelper.DataSet(edges_pojos)
+    this.nodes_vis = new visHelper.DataSet(nodes_pojos)
+    this.edges_vis = new visHelper.DataSet(edges_pojos)
 
 
-    // create a this_component.network
+    // create a network
     var container = document.getElementById('vis-network-container');
     var data= {
-      nodes: this_component.nodes_vis,
-      edges: this_component.edges_vis,
+      nodes: this.nodes_vis,
+      edges: this.edges_vis,
     };
     var options = {
       width: '400px',
       height: '400px'
     };
     
-    this_component.network = new visHelper.Network(container, data, options);
+    this.network = new visHelper.Network(container, data, options);
   },
 });
