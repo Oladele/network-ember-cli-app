@@ -1,7 +1,9 @@
-<h3>Nodes Index</h3>
+<h3>All Nodes</h3>
 <ul>
   {{#each node in model.nodes}}
-    <li>{{ node.id }} : {{ node.label }}</li>
+  {{#link-to 'nodes.show' node}}
+      <li>{{ node.id }} : {{ node.label }}</li>
+    {{/link-to}}
   {{/each}}  
 </ul>
 
