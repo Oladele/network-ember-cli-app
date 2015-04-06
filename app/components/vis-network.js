@@ -45,8 +45,18 @@ export default Ember.Component.extend({
       edges: this.edges_vis,
     };
     var options = {
-      width: '400px',
-      height: '400px'
+      width: '800px',
+      height: '400px',
+      smoothCurves: false,
+      hierarchicalLayout: {
+        levelSeparation: 400,
+        direction: "LR"
+      },
+      nodes: {
+        shape: 'dot',
+        radius: 20,
+        fontSize: 30
+      }
     };
     
     this.network = new visHelper.Network(container, data, options);
