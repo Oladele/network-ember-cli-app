@@ -59,11 +59,11 @@ export default Ember.Component.extend({
     console.log("onSelectNode properties:", properties);
     var ember_component = this.ember_component
     if (properties.nodes.length > 0) {
-      var select_node_obj = { 
+      var show_node_params = { 
         node_id: properties.nodes[0],
         // graph_nodes: ember_component.get_graph_nodes()
       };
-      ember_component.sendAction('action', select_node_obj );
+      ember_component.sendAction('showNode', show_node_params );
     };
   },
 });
