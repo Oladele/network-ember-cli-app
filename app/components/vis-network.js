@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers'
+import {visFilter} from '../utils/vis-helpers'
 
 export default Ember.Component.extend({
   // passed-in
@@ -37,6 +38,11 @@ export default Ember.Component.extend({
     this.nodes_vis = new visHelper.DataSet(nodes_pojos)
     this.edges_vis = new visHelper.DataSet(edges_pojos)
 
+    visFilter({
+      nodes_vis: this.nodes_vis,
+      edges_vis: this.edges_vis,
+      level: 4
+    });
 
     // create a network
     var container = document.getElementById('vis-network-container');
@@ -45,7 +51,7 @@ export default Ember.Component.extend({
       edges: this.edges_vis,
     };
     var options = {
-      width: '800px',
+      width: '1100px',
       height: '400px',
       smoothCurves: false,
       hierarchicalLayout: {
