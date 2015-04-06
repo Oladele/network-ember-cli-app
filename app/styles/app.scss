@@ -1,2 +1,15 @@
 @import 'bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap';
 @import 'bower_components/fontawesome/scss/font-awesome';
+
+$debug-font-color: $gray-light;
+
+.cs-debug {
+  color: $debug-font-color;
+  position: absolute;
+  top: 5px;
+  left: 20px;
+}
+
+body{
+  padding-top: 70px;
+}

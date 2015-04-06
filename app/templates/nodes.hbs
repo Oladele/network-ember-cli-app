@@ -1,14 +1,19 @@
-<h2>Nodes Route</h2>
-<div>
-  <span>bs</span>
-  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <h2> Total nodes: {{model.nodes.length}}</h2>
+      <div class="cs-debug">Nodes Route</div>
+    </div>
+  </div>
 </div>
-<div>
-  <span>fa</span>
-  <span><i class="fa fa-anchor"></i></span>
+  
+<div class="row">
+  <div class="col-md-9">
+    {{vis-network nodes=model.nodes edges=model.edges}}
+  </div>
+  <div class="col-md-3">
+    {{outlet}}
+  </div>
 </div>
 
-<h2> Total nodes: {{model.nodes.length}}</h2>
-{{vis-network nodes=model.nodes edges=model.edges}}
 
-{{outlet}}
