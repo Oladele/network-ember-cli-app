@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import visHelper from '../utils/vis-helpers'
-import {visFilter} from '../utils/vis-helpers'
+import visHelper from '../utils/vis-helpers';
+import {visFilter} from '../utils/vis-helpers';
 
 export default Ember.Component.extend({
   // passed-in
@@ -24,9 +24,9 @@ export default Ember.Component.extend({
 
   toPojoArray: function(storeRecords){
     var pojos = storeRecords.toArray().map(function(record){
-      return record.get('data')
+      return record.get('data');
     });
-    return pojos
+    return pojos;
   },
 
   makeGraph: function(values){
@@ -35,8 +35,8 @@ export default Ember.Component.extend({
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
 
-    this.nodes_vis = new visHelper.DataSet(nodes_pojos)
-    this.edges_vis = new visHelper.DataSet(edges_pojos)
+    this.nodes_vis = new visHelper.DataSet(nodes_pojos);
+    this.edges_vis = new visHelper.DataSet(edges_pojos);
 
     visFilter({
       nodes_vis: this.nodes_vis,
@@ -66,20 +66,20 @@ export default Ember.Component.extend({
     };
     
     this.network = new visHelper.Network(container, data, options);
-    this.network.ember_component = this
+    this.network.ember_component = this;
     this.network.on('select', this.onSelectNode);
   },
 
   onSelectNode: function(properties) {
     // 'this' references instance of Network that triggered this event Handler
     console.log("onSelectNode properties:", properties);
-    var ember_component = this.ember_component
+    var ember_component = this.ember_component;
     if (properties.nodes.length > 0) {
       var show_node_params = { 
         node_id: properties.nodes[0],
         // graph_nodes: ember_component.get_graph_nodes()
       };
       ember_component.sendAction('showNode', show_node_params );
-    };
+    }
   },
 });

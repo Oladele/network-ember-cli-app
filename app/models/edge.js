@@ -2275,4 +2275,4 @@ Edge.reopenClass({
   ]
 });
 
-export default Edge
+export default Edge;

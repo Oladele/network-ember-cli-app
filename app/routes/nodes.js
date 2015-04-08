@@ -12,7 +12,7 @@ export default Ember.Route.extend({
   actions: {
     showNode: function(show_node_params){
       console.log("showin node, show_node_params:", show_node_params);
-      this.transitionTo('nodes.show', show_node_params.node_id)
+      this.transitionTo('nodes.show', show_node_params.node_id);
     }
   }
 });
