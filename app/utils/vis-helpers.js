@@ -24,12 +24,12 @@ export function visFilter(params){
   nodes_vis.remove(filtered_nodes);
   edges_vis.remove(filtered_edges);
 
-  console.log("visFilter params:", params);
-  console.log("visFilter nodes_vis.length:", nodes_vis.length);
-  console.log("visFilter filtered_nodes.length:", filtered_nodes.length);
-  console.log("visFilter edges_vis.length:", edges_vis.length);
-  console.log("visFilter filtered_edges.length:", filtered_edges.length);
-  window.temp_filtered_nodes = filtered_nodes;
+  // console.log("visFilter params:", params);
+  // console.log("visFilter nodes_vis.length:", nodes_vis.length);
+  // console.log("visFilter filtered_nodes.length:", filtered_nodes.length);
+  // console.log("visFilter edges_vis.length:", edges_vis.length);
+  // console.log("visFilter filtered_edges.length:", filtered_edges.length);
+  // window.temp_filtered_nodes = filtered_nodes;
 }
 
 function getNodesAboveLevel(nodes_vis, level, above){

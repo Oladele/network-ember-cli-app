@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import {visFilter} from '../utils/vis-helpers';
+import toLinkedListHelper from '../utils/to-linked-list-helper';
 
 export default Ember.Component.extend({
   // passed-in
@@ -31,6 +32,8 @@ export default Ember.Component.extend({
 
   makeGraph: function(values){
     var nodes_pojos, edges_pojos;
+
+    toLinkedListHelper("yo", "go");
 
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
