@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import {visFilter} from '../utils/vis-helpers';
-import toLinkedListHelper from '../utils/to-linked-list-helper';
+import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
 
 export default Ember.Component.extend({
   // passed-in
@@ -37,9 +37,9 @@ export default Ember.Component.extend({
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
     
-    linkedNodes = toLinkedListHelper(nodes_pojos, edges_pojos);
+    linkedNodes = makeLinkedNodesHelper(nodes_pojos, edges_pojos);
     console.log("linkedNodes:", linkedNodes);
-    
+
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
 

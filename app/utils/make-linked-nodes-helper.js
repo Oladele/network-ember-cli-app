@@ -1,4 +1,4 @@
-export default function toLinkedListHelper(nodes, edges) {
+export default function makeLinkedNodesHelper(nodes, edges) {
   var linkedNodes = makeCopy(nodes);
   $.each(linkedNodes, function(index, node){
     var parent_edges = get_parent_edges(node, edges);
