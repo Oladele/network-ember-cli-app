@@ -1,5 +1,6 @@
 export default function toLinkedListHelper(nodes, edges) {
-  var linkedNodes = $.map(nodes, function(node){
+  var linkedNodes = makeCopy(nodes);
+  $.each(linkedNodes, function(index, node){
     var parent_edges = get_parent_edges(node, edges);
     var parent_links = get_parent_links(parent_edges);
 
@@ -12,6 +13,15 @@ export default function toLinkedListHelper(nodes, edges) {
     return node;
   })
   return linkedNodes;
+}
+
+function makeCopy(nodes){
+  var copied_nodes = $.map(nodes, function(node){
+    var str = JSON.stringify(node);
+    var obj = JSON.parse(str);
+    return obj;
+  })
+  return copied_nodes;
 }
 
 function get_parent_edges(node, edges){
