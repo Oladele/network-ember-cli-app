@@ -32,12 +32,14 @@ export default Ember.Component.extend({
 
   makeGraph: function(values){
     var nodes_pojos, edges_pojos;
-
-    toLinkedListHelper("yo", "go");
+    var linkedNodes;
 
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
-
+    
+    linkedNodes = toLinkedListHelper(nodes_pojos, edges_pojos);
+    console.log("linkedNodes:", linkedNodes);
+    
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
 
