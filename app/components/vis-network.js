@@ -2,6 +2,7 @@ import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import {visFilter} from '../utils/vis-helpers';
 import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
+import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
 
 export default Ember.Component.extend({
   // passed-in
@@ -39,6 +40,9 @@ export default Ember.Component.extend({
     
     this.linkedNodes = makeLinkedNodesHelper(nodes_pojos, edges_pojos);
     console.log("linkedNodes:", this.linkedNodes);
+
+    this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
+    this.searchHelper.findNode(96418);
 
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
