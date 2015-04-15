@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   nodes_vis: [], //visHelper.DataSet()
   edges_vis: [], //visHelper.DataSet()
   network: null, // visHelper.network
+  linkedNodes: null,
 
   showGraph: function(){
     var self = this;
@@ -32,13 +33,12 @@ export default Ember.Component.extend({
 
   makeGraph: function(values){
     var nodes_pojos, edges_pojos;
-    var linkedNodes;
 
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
     
-    linkedNodes = makeLinkedNodesHelper(nodes_pojos, edges_pojos);
-    console.log("linkedNodes:", linkedNodes);
+    this.linkedNodes = makeLinkedNodesHelper(nodes_pojos, edges_pojos);
+    console.log("linkedNodes:", this.linkedNodes);
 
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
@@ -49,12 +49,23 @@ export default Ember.Component.extend({
       level: 4
     });
 
-    // create a network
+    this.createNetwork();
+  },
+
+  createNetwork: function(){
     var container = document.getElementById('vis-network-container');
     var data= {
       nodes: this.nodes_vis,
       edges: this.edges_vis,
     };
+    var options = this.getNetworkOptions();
+
+    this.network = new visHelper.Network(container, data, options);
+    this.network.ember_component = this;
+    this.network.on('select', this.onSelectNode);
+  },
+
+  getNetworkOptions: function(){
     var options = {
       width: '1100px',
       height: '400px',
@@ -69,10 +80,7 @@ export default Ember.Component.extend({
         fontSize: 30
       }
     };
-    
-    this.network = new visHelper.Network(container, data, options);
-    this.network.ember_component = this;
-    this.network.on('select', this.onSelectNode);
+    return options;
   },
 
   onSelectNode: function(properties) {
@@ -87,4 +95,8 @@ export default Ember.Component.extend({
       ember_component.sendAction('showNode', show_node_params );
     }
   },
+
+  filterNetworkShowAllChildrenOfNode: function(node_id){
+
+  }
 });
