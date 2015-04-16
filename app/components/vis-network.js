@@ -37,15 +37,15 @@ export default Ember.Component.extend({
 
     nodes_pojos = this.toPojoArray(values[0]);
     edges_pojos = this.toPojoArray(values[1]);
+
+    this.initializeVisDatasets(nodes_pojos, edges_pojos);
     
-    this.linkedNodes = makeLinkedNodesHelper(nodes_pojos, edges_pojos);
-    console.log("linkedNodes:", this.linkedNodes);
 
     this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
     this.searchHelper.findNode(96418);
 
-    this.nodes_vis = new visHelper.DataSet(nodes_pojos);
-    this.edges_vis = new visHelper.DataSet(edges_pojos);
+    // this.nodes_vis = new visHelper.DataSet(nodes_pojos);
+    // this.edges_vis = new visHelper.DataSet(edges_pojos);
 
     visFilter({
       nodes_vis: this.nodes_vis,
@@ -54,6 +54,15 @@ export default Ember.Component.extend({
     });
 
     this.createNetwork();
+  },
+
+  initializeVisDatasets: function(nodes_pojos, edges_pojos){
+    this.nodes_vis = new visHelper.DataSet(nodes_pojos);
+    this.edges_vis = new visHelper.DataSet(edges_pojos);
+    this.linkedNodes = makeLinkedNodesHelper(this.nodes_vis, this.edges_vis);
+    
+    console.log("linkedNodes:", this.linkedNodes);
+
   },
 
   createNetwork: function(){
