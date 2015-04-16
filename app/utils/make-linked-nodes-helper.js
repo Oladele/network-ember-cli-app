@@ -4,8 +4,8 @@ export default function makeLinkedNodesHelper(nodes_vis, edges_vis) {
   var linkedNodes = makeCopy(nodes);
 
   $.each(linkedNodes, function(index, node){
-    set_parent_links(node, edges, linkedNodes);
-    set_children_links(node, edges);
+    set_parents(node, edges, linkedNodes);
+    set_children(node, edges, linkedNodes);
   })
   return linkedNodes;
 }
@@ -19,7 +19,11 @@ function makeCopy(nodes){
   return copied_nodes;
 }
 
-function set_parent_links(node, edges, nodes){
+// ********************
+// PARENT REFERENCES
+// ********************
+
+function set_parents(node, edges, nodes){
   var parent_edges = get_parent_edges(node, edges);
   var parent_nodes = get_parent_nodes(parent_edges, nodes);
   var parent_links = $.map(parent_edges, function(edge){
@@ -54,12 +58,19 @@ function get_parent_node(parent_edge, nodes){
   return parent_node[0];
 }
 
-function set_children_links(node, edges){
+// ********************
+// CHILDREN REFERENCES
+// ********************
+
+function set_children(node, edges, nodes){
   var children_edges = get_children_edges(node, edges);
+  var children_nodes = get_children_nodes(children_edges, nodes);
   var children_links = $.map(children_edges, function(edge){
     return {node_id: edge.from, edge_id: edge.id};
   });
   node.children_links = children_links;
+  node.children_edges = children_edges;
+  node.children_nodes = children_nodes;
 }
 
 function get_children_edges(node, edges){
@@ -68,4 +79,20 @@ function get_children_edges(node, edges){
     return bool_test;
   });
   return children_edges;
+}
+
+function get_children_nodes(children_edges, nodes){
+  var children_nodes = [];
+  $.each(children_edges, function(index, children_edge){
+    var children_node = get_children_node(children_edge, nodes);
+    children_nodes.push( children_node );
+  })
+  return children_nodes;
+}
+
+function get_children_node(children_edge, nodes){
+  var children_node = $.grep(nodes, function(node){
+    return children_edge.from == node.id;
+  })
+  return children_node[0];
 }
