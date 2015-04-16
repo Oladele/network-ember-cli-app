@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     
 
     this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
-    this.searchHelper.findNode(96418);
+    this.searchHelper.findNode(95341);
 
     // this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     // this.edges_vis = new visHelper.DataSet(edges_pojos);
