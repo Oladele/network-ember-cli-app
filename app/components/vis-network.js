@@ -2,6 +2,7 @@ import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import {visFilter} from '../utils/vis-helpers';
 import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
+import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
 
 export default Ember.Component.extend({
@@ -41,8 +42,12 @@ export default Ember.Component.extend({
     this.initializeVisDatasets(nodes_pojos, edges_pojos);
     
 
-    this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
-    this.searchHelper.findNode(95341);
+    // this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
+    // this.searchHelper.findNode(95341);
+
+    // var convertedObjects = convertLinkedNodesHelper(this.linkedNodes);
+    // console.log("convertedObjects:", convertedObjects);
+
 
     // this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     // this.edges_vis = new visHelper.DataSet(edges_pojos);
@@ -60,9 +65,6 @@ export default Ember.Component.extend({
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
     this.linkedNodes = makeLinkedNodesHelper(this.nodes_vis, this.edges_vis);
-    
-    console.log("linkedNodes:", this.linkedNodes);
-
   },
 
   createNetwork: function(){
@@ -101,15 +103,32 @@ export default Ember.Component.extend({
     console.log("onSelectNode properties:", properties);
     var ember_component = this.ember_component;
     if (properties.nodes.length > 0) {
+      var node_id = properties.nodes[0]; 
       var show_node_params = { 
-        node_id: properties.nodes[0],
+        node_id: node_id
         // graph_nodes: ember_component.get_graph_nodes()
       };
+
+      ember_component.showDescendants(node_id);
       ember_component.sendAction('showNode', show_node_params );
     }
   },
 
-  filterNetworkShowAllChildrenOfNode: function(node_id){
+  showDescendants: function(node_id){
+    var descendant_linkedNodes = [];
+    var descendant_obj = {};
+    var descendant_nodes = [];
+    var descendant_edges = [];
+    var searchHelper;
 
+    searchHelper = searchLinkedNodesHelper(this.linkedNodes);
+    descendant_linkedNodes = searchHelper.getDescendants(node_id);
+
+    descendant_obj = convertLinkedNodesHelper(descendant_linkedNodes);
+    descendant_nodes = descendant_obj.nodes;
+    descendant_edges = descendant_obj.edges;
+
+    this.nodes_vis.update(descendant_nodes);
+    this.edges_vis.update(descendant_edges);
   }
 });

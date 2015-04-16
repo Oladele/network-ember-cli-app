@@ -1,17 +1,16 @@
 export default function searchLinkedNodesHelper(linkedNodes) {
   var searchHelper = {};
   searchHelper.linkedNodes = linkedNodes;
-  searchHelper.findNode = findNode;
+  searchHelper.getDescendants = getDescendants;
   return searchHelper;
 }
 
-function findNode(node_id){
-  console.log("you called searchHelper.findNode id:", node_id);
+function getDescendants(node_id){
+  console.log("you called searchHelper.getDescendantLinkedNodes id:", node_id);
   var node = _findNode(node_id, this.linkedNodes);
   var descendants = _getDescendants(node);
   var ancestors = _getAncestors(node);
-  console.log("descendants:", descendants);
-  console.log("ancestors:", ancestors);
+  return descendants;
 }
 
 function _findNode(node_id, nodes){
