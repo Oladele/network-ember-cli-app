@@ -109,7 +109,7 @@ export default Ember.Component.extend({
     var searchHelper;
 
     searchHelper = searchLinkedNodesHelper(this.linkedNodes);
-    descendant_linkedNodes = searchHelper.getDescendants(node_id);
+    descendant_linkedNodes = searchHelper.getDescendants(node_id,2);
     descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
 
     this.updateNodesEdges(descendant_data);
