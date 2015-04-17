@@ -54,6 +54,8 @@ export default Ember.Component.extend({
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
     this.linkedNodes = makeLinkedNodesHelper(this.nodes_vis, this.edges_vis);
+    this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
+
   },
 
   createNetwork: function(){
@@ -106,10 +108,8 @@ export default Ember.Component.extend({
   showDescendants: function(node_id){
     var descendant_linkedNodes = [];
     var descendant_data = {};
-    var searchHelper;
 
-    searchHelper = searchLinkedNodesHelper(this.linkedNodes);
-    descendant_linkedNodes = searchHelper.getDescendants(node_id,2);
+    descendant_linkedNodes = this.searchHelper.getDescendants(node_id,2);
     descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
 
     this.updateNodesEdges(descendant_data);
