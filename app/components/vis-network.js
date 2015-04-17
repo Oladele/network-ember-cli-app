@@ -40,17 +40,6 @@ export default Ember.Component.extend({
     edges_pojos = this.toPojoArray(values[1]);
 
     this.initializeVisDatasets(nodes_pojos, edges_pojos);
-    
-
-    // this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
-    // this.searchHelper.findNode(95341);
-
-    // var convertedObjects = convertLinkedNodesHelper(this.linkedNodes);
-    // console.log("convertedObjects:", convertedObjects);
-
-
-    // this.nodes_vis = new visHelper.DataSet(nodes_pojos);
-    // this.edges_vis = new visHelper.DataSet(edges_pojos);
 
     visFilter({
       nodes_vis: this.nodes_vis,
@@ -116,19 +105,18 @@ export default Ember.Component.extend({
 
   showDescendants: function(node_id){
     var descendant_linkedNodes = [];
-    var descendant_obj = {};
-    var descendant_nodes = [];
-    var descendant_edges = [];
+    var descendant_data = {};
     var searchHelper;
 
     searchHelper = searchLinkedNodesHelper(this.linkedNodes);
     descendant_linkedNodes = searchHelper.getDescendants(node_id);
+    descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
 
-    descendant_obj = convertLinkedNodesHelper(descendant_linkedNodes);
-    descendant_nodes = descendant_obj.nodes;
-    descendant_edges = descendant_obj.edges;
+    this.updateNodesEdges(descendant_data);
+  },
 
-    this.nodes_vis.update(descendant_nodes);
-    this.edges_vis.update(descendant_edges);
+  updateNodesEdges: function(data){
+    this.nodes_vis.update(data.nodes);
+    this.edges_vis.update(data.edges);
   }
 });
