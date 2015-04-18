@@ -1,16 +1,9 @@
-export default function removeVisAboveLevelHelper(params) {
-  visFilter(params);
+export default function removeVisAboveLevelHelper(nodes_vis, edges_vis, level) {
+  visFilter(nodes_vis, edges_vis, level);
   return true;
 }
 
-function visFilter(params){
-  var nodes_vis, edges_vis, level ;
-  // required
-  nodes_vis = params.nodes_vis;
-  edges_vis = params.edges_vis;
-  level = params.level;
-
-  // internal
+function visFilter(nodes_vis, edges_vis, level){
   var filtered_nodes = []
   var filtered_edges = []
 

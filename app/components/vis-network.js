@@ -26,28 +26,19 @@ export default Ember.Component.extend({
     });
   }.on('didInsertElement'),
 
+  makeGraph: function(values){
+    var nodes_pojos, edges_pojos;
+    nodes_pojos = this.toPojoArray(values[0]);
+    edges_pojos = this.toPojoArray(values[1]);
+    this.initializeVisDatasets(nodes_pojos, edges_pojos);
+    this.createNetwork();
+  },
+
   toPojoArray: function(storeRecords){
     var pojos = storeRecords.toArray().map(function(record){
       return record.get('data');
     });
     return pojos;
-  },
-
-  makeGraph: function(values){
-    var nodes_pojos, edges_pojos;
-
-    nodes_pojos = this.toPojoArray(values[0]);
-    edges_pojos = this.toPojoArray(values[1]);
-
-    this.initializeVisDatasets(nodes_pojos, edges_pojos);
-
-    removeVisAboveLevel({
-      nodes_vis: this.nodes_vis,
-      edges_vis: this.edges_vis,
-      level: 4
-    });
-
-    this.createNetwork();
   },
 
   initializeVisDatasets: function(nodes_pojos, edges_pojos){
@@ -56,6 +47,7 @@ export default Ember.Component.extend({
     this.linkedNodes = makeLinkedNodesHelper(this.nodes_vis, this.edges_vis);
     this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
 
+    removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
   },
 
   createNetwork: function(){
