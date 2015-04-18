@@ -101,10 +101,8 @@ export default Ember.Component.extend({
     var descendantsAreShowing = this.areDescendantsShowing(node_id);
     
     if (descendantsAreShowing) {
-      console.warn("areDescendantsShowing:", descendantsAreShowing);
       this.hideDescendants(node_id);
     } else{
-      console.warn("areDescendantsShowing:", descendantsAreShowing);
       this.showDescendants(node_id);
     };
   },
