@@ -91,7 +91,6 @@ export default Ember.Component.extend({
 
   onSelectNode: function(properties) {
     // 'this' references instance of Network that triggered this event Handler
-    console.log("onSelectNode properties:", properties);
     var ember_component = this.ember_component;
     if (properties.nodes.length > 0) {
       var node_id = properties.nodes[0]; 
@@ -100,23 +99,55 @@ export default Ember.Component.extend({
         // graph_nodes: ember_component.get_graph_nodes()
       };
 
-      ember_component.showDescendants(node_id);
+      ember_component.toggleShowDescendants(node_id);
       ember_component.sendAction('showNode', show_node_params );
     }
   },
 
+  toggleShowDescendants: function(node_id){
+
+    var descendantsAreShowing = this.areDescendantsShowing(node_id);
+    
+    if (descendantsAreShowing) {
+      console.warn("areDescendantsShowing:", descendantsAreShowing);
+      this.hideDescendants(node_id);
+    } else{
+      console.warn("areDescendantsShowing:", descendantsAreShowing);
+      this.showDescendants(node_id);
+    };
+  },
+
   showDescendants: function(node_id){
-    var descendant_linkedNodes = [];
-    var descendant_data = {};
-
-    descendant_linkedNodes = this.searchHelper.getDescendants(node_id,2);
-    descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
-
+    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id,2);
+    var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
     this.updateNodesEdges(descendant_data);
+  },
+
+  hideDescendants: function(node_id){
+    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id);
+    var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
+    this.removeNodesEdges(descendant_data);
   },
 
   updateNodesEdges: function(data){
     this.nodes_vis.update(data.nodes);
     this.edges_vis.update(data.edges);
+  },
+
+  removeNodesEdges: function(data){
+    this.nodes_vis.remove(data.nodes);
+    this.edges_vis.remove(data.edges);
+  },
+
+  areDescendantsShowing: function(node_id){
+
+    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id,1);
+    var node_vis = this.nodes_vis.get(node_id);
+    var children_edges = this.edges_vis.get({
+      filter: function(edge){
+        return (edge.to == node_id);
+      }
+    });
+    return descendant_linkedNodes.length == children_edges.length;
   }
 });
