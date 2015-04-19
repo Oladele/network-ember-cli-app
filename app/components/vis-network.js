@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
-import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
+// import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
 
 export default Ember.Component.extend({
@@ -105,14 +105,14 @@ export default Ember.Component.extend({
   },
 
   showDescendants: function(node_id){
-    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id,2);
-    var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
+    var descendant_data = this.searchHelper.getDescendants(node_id,2);
+    // var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
     this.updateNodesEdges(descendant_data);
   },
 
   hideDescendants: function(node_id){
-    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id);
-    var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
+    var descendant_data = this.searchHelper.getDescendants(node_id);
+    // var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
     this.removeNodesEdges(descendant_data);
   },
 
@@ -128,13 +128,13 @@ export default Ember.Component.extend({
 
   areDescendantsShowing: function(node_id){
 
-    var descendant_linkedNodes = this.searchHelper.getDescendants(node_id,1);
+    var descendant_data = this.searchHelper.getDescendants(node_id,1);
     var node_vis = this.nodes_vis.get(node_id);
     var children_edges = this.edges_vis.get({
       filter: function(edge){
         return (edge.to == node_id);
       }
     });
-    return descendant_linkedNodes.length == children_edges.length;
+    return descendant_data.edges.length == children_edges.length;
   }
 });

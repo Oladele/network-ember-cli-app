@@ -1,4 +1,5 @@
 import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
+import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 
 export default function searchLinkedNodesHelper(nodes_vis, edges_vis) {
   var searchHelper = {};
@@ -12,7 +13,9 @@ function getDescendants(node_id, desired_depth){
   console.log("you called searchHelper.getDescendantLinkedNodes id:", node_id);
   var node = _findNode(node_id, this.linkedNodes);
   var descendants = _getDescendants(node, desired_depth);
-  return descendants;
+  var descendant_data = convertLinkedNodesHelper(descendants);
+
+  return descendant_data;
 }
 
 function _findNode(node_id, nodes){
