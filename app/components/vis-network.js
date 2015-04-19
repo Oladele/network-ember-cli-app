@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
-import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
+import visFinderHelper from '../utils/vis-finder-helper';
 
 export default Ember.Component.extend({
   // passed-in
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
   initializeVisDatasets: function(nodes_pojos, edges_pojos){
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
-    this.searchHelper = searchLinkedNodesHelper(this.nodes_vis, this.edges_vis);
+    this.searchHelper = visFinderHelper(this.nodes_vis, this.edges_vis);
 
     removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
   },
