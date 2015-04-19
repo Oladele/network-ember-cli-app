@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
-import visFinderHelper from '../utils/vis-finder-helper';
+import visDisplayHelper from '../utils/vis-display-helper';
 
 export default Ember.Component.extend({
   // passed-in
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
   initializeVisDatasets: function(nodes_pojos, edges_pojos){
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
-    this.finderHelper = visFinderHelper(this.nodes_vis, this.edges_vis);
+    this.displayHelper = visDisplayHelper(this.nodes_vis, this.edges_vis);
 
     removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
   },
@@ -87,51 +87,9 @@ export default Ember.Component.extend({
         // graph_nodes: ember_component.get_graph_nodes()
       };
 
-      ember_component.toggleShowDescendants(node_id);
+      // ember_component.toggleShowDescendants(node_id);
+      ember_component.displayHelper.toggleShowDescendants(node_id);
       ember_component.sendAction('showNode', show_node_params );
     }
   },
-
-  toggleShowDescendants: function(node_id){
-
-    var descendantsAreShowing = this.areDescendantsShowing(node_id);
-    
-    if (descendantsAreShowing) {
-      this.hideDescendants(node_id);
-    } else{
-      this.showDescendants(node_id);
-    };
-  },
-
-  showDescendants: function(node_id){
-    var descendant_data = this.finderHelper.getDescendants(node_id,2);
-    this.updateNodesEdges(descendant_data);
-  },
-
-  hideDescendants: function(node_id){
-    var descendant_data = this.finderHelper.getDescendants(node_id);
-    this.removeNodesEdges(descendant_data);
-  },
-
-  updateNodesEdges: function(data){
-    this.nodes_vis.update(data.nodes);
-    this.edges_vis.update(data.edges);
-  },
-
-  removeNodesEdges: function(data){
-    this.nodes_vis.remove(data.nodes);
-    this.edges_vis.remove(data.edges);
-  },
-
-  areDescendantsShowing: function(node_id){
-
-    var descendant_data = this.finderHelper.getDescendants(node_id,1);
-    var node_vis = this.nodes_vis.get(node_id);
-    var children_edges = this.edges_vis.get({
-      filter: function(edge){
-        return (edge.to == node_id);
-      }
-    });
-    return descendant_data.edges.length == children_edges.length;
-  }
 });
