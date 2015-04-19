@@ -41,7 +41,7 @@ export default Ember.Component.extend({
   initializeVisDatasets: function(nodes_pojos, edges_pojos){
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
-    this.searchHelper = visFinderHelper(this.nodes_vis, this.edges_vis);
+    this.finderHelper = visFinderHelper(this.nodes_vis, this.edges_vis);
 
     removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
   },
@@ -104,12 +104,12 @@ export default Ember.Component.extend({
   },
 
   showDescendants: function(node_id){
-    var descendant_data = this.searchHelper.getDescendants(node_id,2);
+    var descendant_data = this.finderHelper.getDescendants(node_id,2);
     this.updateNodesEdges(descendant_data);
   },
 
   hideDescendants: function(node_id){
-    var descendant_data = this.searchHelper.getDescendants(node_id);
+    var descendant_data = this.finderHelper.getDescendants(node_id);
     this.removeNodesEdges(descendant_data);
   },
 
@@ -125,7 +125,7 @@ export default Ember.Component.extend({
 
   areDescendantsShowing: function(node_id){
 
-    var descendant_data = this.searchHelper.getDescendants(node_id,1);
+    var descendant_data = this.finderHelper.getDescendants(node_id,1);
     var node_vis = this.nodes_vis.get(node_id);
     var children_edges = this.edges_vis.get({
       filter: function(edge){
