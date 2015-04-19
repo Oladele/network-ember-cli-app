@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
-import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
 import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
 
@@ -13,7 +12,6 @@ export default Ember.Component.extend({
   nodes_vis: [], //visHelper.DataSet()
   edges_vis: [], //visHelper.DataSet()
   network: null, // visHelper.network
-  linkedNodes: null,
 
   showGraph: function(){
     var self = this;
@@ -44,8 +42,7 @@ export default Ember.Component.extend({
   initializeVisDatasets: function(nodes_pojos, edges_pojos){
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
-    this.linkedNodes = makeLinkedNodesHelper(this.nodes_vis, this.edges_vis);
-    this.searchHelper = searchLinkedNodesHelper(this.linkedNodes);
+    this.searchHelper = searchLinkedNodesHelper(this.nodes_vis, this.edges_vis);
 
     removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
   },

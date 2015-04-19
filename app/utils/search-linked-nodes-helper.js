@@ -1,6 +1,9 @@
-export default function searchLinkedNodesHelper(linkedNodes) {
+import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
+
+export default function searchLinkedNodesHelper(nodes_vis, edges_vis) {
   var searchHelper = {};
-  searchHelper.linkedNodes = linkedNodes;
+  
+  searchHelper.linkedNodes = makeLinkedNodesHelper(nodes_vis, edges_vis);
   searchHelper.getDescendants = getDescendants;
   return searchHelper;
 }
