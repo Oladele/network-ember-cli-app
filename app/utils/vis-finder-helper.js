@@ -1,19 +1,19 @@
 import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
 import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 
-export default function searchLinkedNodesHelper(nodes_vis, edges_vis) {
-  var searchHelper = makeSearchHelper(nodes_vis, edges_vis);
-  return searchHelper;
+export default function visFinderHelper(nodes_vis, edges_vis) {
+  var finderHelper = makeFinderHelper(nodes_vis, edges_vis);
+  return finderHelper;
 }
 
-function makeSearchHelper(nodes_vis, edges_vis){
-  var searchHelper = {
+function makeFinderHelper(nodes_vis, edges_vis){
+  var finderHelper = {
     nodes_vis: nodes_vis,
     edges_vis: edges_vis,
     linkedNodes: makeLinkedNodesHelper(nodes_vis, edges_vis),
 
     getDescendants: function(node_id, desired_depth){
-      console.log("you called searchHelper.getDescendantLinkedNodes id:", node_id);
+      console.log("you called finderHelper.getDescendantLinkedNodes id:", node_id);
       var node = this._findNode(node_id, this.linkedNodes);
       var descendants = this._getDescendants(node, desired_depth);
       var descendant_data = convertLinkedNodesHelper(descendants);
@@ -44,5 +44,5 @@ function makeSearchHelper(nodes_vis, edges_vis){
     }
   }// end searcHelper object definition
 
-  return searchHelper;
+  return finderHelper;
 }
