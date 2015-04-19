@@ -15,36 +15,36 @@ function makeDisplayHelper(nodes_vis, edges_vis){
 
     toggleShowDescendants: function(node_id){
 
-      var descendantsAreShowing = this.areDescendantsShowing(node_id);
+      var descendantsAreShowing = this._areDescendantsShowing(node_id);
       
       if (descendantsAreShowing) {
-        this.hideDescendants(node_id);
+        this._hideDescendants(node_id);
       } else{
-        this.showDescendants(node_id);
+        this._showDescendants(node_id);
       };
     },
 
-    showDescendants: function(node_id){
+    _showDescendants: function(node_id){
       var descendant_data = this.finderHelper.getDescendants(node_id,2);
-      this.updateNodesEdges(descendant_data);
+      this._updateNodesEdges(descendant_data);
     },
 
-    hideDescendants: function(node_id){
+    _hideDescendants: function(node_id){
       var descendant_data = this.finderHelper.getDescendants(node_id);
-      this.removeNodesEdges(descendant_data);
+      this._removeNodesEdges(descendant_data);
     },
 
-    updateNodesEdges: function(data){
+    _updateNodesEdges: function(data){
       this.nodes_vis.update(data.nodes);
       this.edges_vis.update(data.edges);
     },
 
-    removeNodesEdges: function(data){
+    _removeNodesEdges: function(data){
       this.nodes_vis.remove(data.nodes);
       this.edges_vis.remove(data.edges);
     },
 
-    areDescendantsShowing: function(node_id){
+    _areDescendantsShowing: function(node_id){
 
       var descendant_data = this.finderHelper.getDescendants(node_id,1);
       var node_vis = this.nodes_vis.get(node_id);
