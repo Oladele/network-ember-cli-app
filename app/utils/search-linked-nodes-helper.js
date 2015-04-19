@@ -2,8 +2,8 @@ import makeLinkedNodesHelper from '../utils/make-linked-nodes-helper';
 import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 
 export default function searchLinkedNodesHelper(nodes_vis, edges_vis) {
-
-  return makeSearchHelper(nodes_vis, edges_vis)
+  var searchHelper = makeSearchHelper(nodes_vis, edges_vis);
+  return searchHelper;
 }
 
 function makeSearchHelper(nodes_vis, edges_vis){
