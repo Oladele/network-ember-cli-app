@@ -12,14 +12,28 @@ function makeFinderHelper(nodes_vis, edges_vis){
     edges_vis: edges_vis,
     linkedNodes: makeLinkedNodesHelper(nodes_vis, edges_vis),
 
-    getDescendants: function(node_id, desired_depth){
+    findDescendants: function(node_id, desired_depth){
       console.log("you called finderHelper.getDescendantLinkedNodes id:", node_id);
-      var node = this._findNode(node_id, this.linkedNodes);
+      var node = this._getNode(node_id, this.linkedNodes);
       var descendants = this._getDescendants(node, desired_depth);
       var descendant_data = convertLinkedNodesHelper(descendants);
       return descendant_data;
     },
-    _findNode: function(node_id, nodes){
+
+    findEqualOrLessThanLevel: function(level){
+      var nodes = this._getNodesUpToLevel(level);
+      var data = convertLinkedNodesHelper(nodes);
+      return data;
+    },
+
+    _getNodesUpToLevel: function(level){
+      var nodes = $.grep(this.linkedNodes,function(node){
+        return node.level <= level;
+      });
+      return nodes;
+    },
+
+    _getNode: function(node_id, nodes){
       var node = $.grep(nodes,function(node){
         return node_id == node.id;
       });
