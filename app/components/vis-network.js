@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
 import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
-// import convertLinkedNodesHelper from '../utils/convert-linked-nodes-helper';
 import searchLinkedNodesHelper from '../utils/search-linked-nodes-helper';
 
 export default Ember.Component.extend({
@@ -106,13 +105,11 @@ export default Ember.Component.extend({
 
   showDescendants: function(node_id){
     var descendant_data = this.searchHelper.getDescendants(node_id,2);
-    // var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
     this.updateNodesEdges(descendant_data);
   },
 
   hideDescendants: function(node_id){
     var descendant_data = this.searchHelper.getDescendants(node_id);
-    // var descendant_data = convertLinkedNodesHelper(descendant_linkedNodes);
     this.removeNodesEdges(descendant_data);
   },
 
