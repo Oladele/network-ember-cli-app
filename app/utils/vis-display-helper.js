@@ -25,21 +25,13 @@ function makeDisplayHelper(nodes_vis, edges_vis){
     },
 
     _showDescendants: function(node_id){
-      var descendant_data = this.finderHelper.getDescendants(node_id,2);
-      this._updateNodesEdges(descendant_data);
-    },
-
-    _hideDescendants: function(node_id){
-      var descendant_data = this.finderHelper.getDescendants(node_id);
-      this._removeNodesEdges(descendant_data);
-    },
-
-    _updateNodesEdges: function(data){
+      var data = this.finderHelper.getDescendants(node_id,2);
       this.nodes_vis.update(data.nodes);
       this.edges_vis.update(data.edges);
     },
 
-    _removeNodesEdges: function(data){
+    _hideDescendants: function(node_id){
+      var data = this.finderHelper.getDescendants(node_id);
       this.nodes_vis.remove(data.nodes);
       this.edges_vis.remove(data.edges);
     },
