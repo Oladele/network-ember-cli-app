@@ -12,7 +12,6 @@ function getDescendants(node_id, desired_depth){
   console.log("you called searchHelper.getDescendantLinkedNodes id:", node_id);
   var node = _findNode(node_id, this.linkedNodes);
   var descendants = _getDescendants(node, desired_depth);
-  var ancestors = _getAncestors(node);
   return descendants;
 }
 
@@ -38,16 +37,5 @@ function _getDescendants(node, desired_depth, current_depth, result){
     });    
   };
 
-  return result;
-}
-
-function _getAncestors(node, result){
-  result = result || [];
-  var parents = node.parent_nodes;
-
-  $.each(parents, function(index, node){
-    result.push(node);
-    _getAncestors(node, result);
-  });
   return result;
 }
