@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import visHelper from '../utils/vis-helpers';
-import removeVisAboveLevel from '../utils/remove-vis-above-level-helper';
 import visDisplayHelper from '../utils/vis-display-helper';
 
 export default Ember.Component.extend({
@@ -42,8 +41,7 @@ export default Ember.Component.extend({
     this.nodes_vis = new visHelper.DataSet(nodes_pojos);
     this.edges_vis = new visHelper.DataSet(edges_pojos);
     this.displayHelper = visDisplayHelper(this.nodes_vis, this.edges_vis);
-
-    removeVisAboveLevel(this.nodes_vis, this.edges_vis, 4);
+    this.displayHelper.showEqualOrLessThanLevel(4);
   },
 
   createNetwork: function(){
