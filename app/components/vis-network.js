@@ -59,7 +59,7 @@ export default Ember.Component.extend({
 
   getNetworkOptions: function(){
     var options = {
-      width: '1100px',
+      width: '800px',
       height: '400px',
       smoothCurves: false,
       hierarchicalLayout: {
