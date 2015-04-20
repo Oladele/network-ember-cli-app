@@ -1,19 +1,17 @@
 @import 'bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrap';
 @import 'bower_components/fontawesome/scss/font-awesome';
 
-$debug-font-color: $gray-lighter;
+$debug-text-font-color: red;
+$debug-frame-color: $gray-lighter;
 
-.cs-debug {
-  color: $debug-font-color;
-  position: absolute;
-  top: 5px;
-  left: 20px;
+.cs-debug-text {
+  color: $debug-text-font-color;
+}
+
+.cs-debug-frame{
+  border: 2px solid $debug-frame-color;
 }
 
 body{
   padding-top: 70px;
-}
-
-.cs-show-frame{
-  border: 2px solid $debug-font-color;
 }

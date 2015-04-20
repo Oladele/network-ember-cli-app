@@ -1,15 +1,15 @@
+<div class="cs-debug-text">Nodes Route</div>
 <div class="row">
-  <div class="col-md-12 cs-show-frame">
+  <div class="col-md-12 cs-debug-frame">
     <h2> Total nodes: {{model.nodes.length}}</h2>
-    <div class="cs-debug">Nodes Route</div>
   </div>
 </div>
   
 <div class="row">
-  <div class="col-md-9 cs-show-frame">
+  <div class="col-md-9 cs-debug-frame">
     {{vis-network showNode="showNode" nodes=model.nodes edges=model.edges}}
   </div>
-  <div class="col-md-3 cs-show-frame">
+  <div class="col-md-3 cs-debug-frame">
     {{outlet}}
   </div>
 </div>
