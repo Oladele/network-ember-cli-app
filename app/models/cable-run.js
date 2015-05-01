@@ -1,0 +1,31 @@
+import DS from 'ember-data';
+
+export default DS.Model.extend({
+  site: DS.attr('string'),
+  building: DS.attr('string'),
+  oltRack: DS.attr('string'),
+  oltChassis: DS.attr('string'),
+  ponCard: DS.attr('string'),
+  ponPort: DS.attr('string'),
+  vamShelf: DS.attr('string'),
+  vamModule: DS.attr('string'),
+  vamPort: DS.attr('string'),
+  backboneShelf: DS.attr('string'),
+  backboneCable: DS.attr('string'),
+  backbonePort: DS.attr('string'),
+  fdh: DS.attr('string'),
+  fdhLocation: DS.attr('string'),
+  splitter: DS.attr('string'),
+  splitterFiber: DS.attr('string'),
+  fdhPort: DS.attr('string'),
+  rdt: DS.attr('string'),
+  rdtLocation: DS.attr('string'),
+  rdtPort: DS.attr('string'),
+  drop: DS.attr('string'),
+  room: DS.attr('string'),
+  ontSn: DS.attr('string'),
+  ontGe1Mac: DS.attr('string'),
+  ontGe2Mac: DS.attr('string'),
+  ontGe3Mac: DS.attr('string'),
+  ontGe4Mac: DS.attr('string')
+});

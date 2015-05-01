@@ -12,4 +12,5 @@ export default Router.map(function() {
     });
   });
   this.resource('edges', function() {});
+  this.resource('cableRuns', function() {});
 });
