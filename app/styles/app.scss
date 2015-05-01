@@ -4,6 +4,10 @@
 $debug-text-font-color: red;
 $debug-frame-color: $gray-lighter;
 
+body{
+  padding-top: 70px;
+}
+
 .cs-debug-text {
   color: $debug-text-font-color;
 }
@@ -12,6 +16,7 @@ $debug-frame-color: $gray-lighter;
   border: 2px solid $debug-frame-color;
 }
 
-body{
-  padding-top: 70px;
+.cs-graph-pane, .cs-node-pane{
+  height: 400px;
+  overflow-x: scroll;
 }
