@@ -4,9 +4,11 @@ export default Ember.Route.extend({
   model: function(){
     var nodes = this.store.findAll('node');
     var edges = this.store.findAll('edge');
+    var cableRuns = this.store.findAll('cableRun');
     return {
       nodes: nodes,
-      edges: edges
+      edges: edges,
+      cableRuns: cableRuns
     };
   },
   actions: {

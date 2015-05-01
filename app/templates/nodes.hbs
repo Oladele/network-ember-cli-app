@@ -14,4 +14,31 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">    
+    <table class="primary">
+      <thead>
+        <tr>
+          <th>ID </th>
+          <th>OLT Rack </th>
+          <th>OLT Chassis </th>
+          <th>Pon Card</th>
+          <th>ONT SN# </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cableRun in model.cableRuns}}
+        <tr>
+          <td>{{cableRun.id}}</td>
+          <td>{{cableRun.olt_rack}}</td>
+          <td>{{cableRun.olt_chassis}}</td>
+          <td>{{cableRun.pon_card}}</td>
+          <td>{{cableRun.ont_sn}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
