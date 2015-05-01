@@ -5,5 +5,12 @@
 
     Setting `disableAnalytics` to true will prevent any data from being sent.
   */
-  "disableAnalytics": false
+  "disableAnalytics": false,
+
+  /*
+    below added because live reload or even normal reload was not working
+    http://stackoverflow.com/questions/27869083/ember-cli-live-reload-not-working
+  */
+  "liveReload": true,
+  "watcher": "polling"
 }
