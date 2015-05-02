@@ -16,16 +16,29 @@
 
 <div class="row">
   <div class="col-md-12">    
-    <table class="primary">
+    <table class="primary" id="crl-table">
       <thead>
         <tr>
           <th>ID </th>
           <th>OLT Rack </th>
           <th>OLT Chassis </th>
           <th>Pon Card</th>
+          <th>Splitter</th>
+          <th>Room</th>
           <th>ONT SN# </th>
         </tr>
       </thead>
+      <tfoot>
+        <tr>
+          <th><input type="text" placeholder="ID"></th>
+          <th><input type="text" placeholder="OLT Rack"></th>
+          <th><input type="text" placeholder="OLT Chassis"></th>
+          <th><input type="text" placeholder="Pon Card"></th>
+          <th><input type="text" placeholder="Splitter"></th>
+          <th><input type="text" placeholder="Room"></th>
+          <th><input type="text" placeholder="ONT SN#"></th>
+        </tr>
+      </tfoot>
       <tbody>
         {{#each cableRun in model.cableRuns}}
         <tr>
@@ -33,6 +46,8 @@
           <td>{{cableRun.olt_rack}}</td>
           <td>{{cableRun.olt_chassis}}</td>
           <td>{{cableRun.pon_card}}</td>
+          <td>{{cableRun.splitter}}</td>
+          <td>{{cableRun.room}}</td>
           <td>{{cableRun.ont_sn}}</td>
         </tr>
         {{/each}}

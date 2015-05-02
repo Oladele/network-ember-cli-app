@@ -22,6 +22,9 @@ app.import('bower_components/vis/dist/vis.js');
 // Bootstrap
 app.import('bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js');
 
+app.import('bower_components/DataTables/media/js/jquery.dataTables.js');
+app.import('bower_components/DataTables/media/css/jquery.dataTables.css');
+
 // Glyphicons
 // http://hbrysiewicz.github.io/2014-10-14-ember-bootstrap-sass-summernote.html
 // var pickFiles = require('broccoli-static-compiler'); //**Deprecated**
